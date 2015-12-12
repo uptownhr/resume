@@ -26,6 +26,10 @@ var userSchema = new mongoose.Schema({
   resetPasswordExpires: Date
 });
 
+
+
+
+
 /**
  * Password hash middleware.
  */

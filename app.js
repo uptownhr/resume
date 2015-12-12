@@ -29,6 +29,7 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
+var adminUserController = require('./controllers/admin/user');
 
 /**
  * API keys and Passport configuration.
@@ -54,8 +55,11 @@ mongoose.connection.on('error', function() {
  * Express configuration.
  */
 app.set('port', process.env.PORT || 3000);
+
 app.set('views', path.join(__dirname, 'views'));
+app.locals.basedir = path.join(__dirname, 'views');
 app.set('view engine', 'jade');
+
 app.use(compress());
 app.use(sass({
   src: path.join(__dirname, 'public'),
@@ -117,6 +121,14 @@ app.post('/account/profile', passportConf.isAuthenticated, userController.postUp
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
+
+
+/**
+ * Admin Routes
+ */
+app.get('/admin/users', adminUserController.list)
+app.get('/admin/users/edit/:id?', adminUserController.edit)
+app.post('/admin/users/save', adminUserController.save)
 
 /**
  * API examples routes.
