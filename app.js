@@ -128,6 +128,7 @@ app.get('/account/unlink/:provider', passportConf.isAuthenticated, userControlle
  */
 app.get('/admin/users', adminUserController.list)
 app.get('/admin/users/edit/:id?', adminUserController.edit)
+app.get('/admin/users/delete/:id?', adminUserController.delete)
 app.post('/admin/users/save', adminUserController.save)
 
 /**

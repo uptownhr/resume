@@ -41,6 +41,7 @@ exports.save = function(req, res){
   var body = req.body
 
   if(body.id){
+    //edit existing user
     User.findOne({_id: body.id}, function(err, user){
       if(err) return res.status(503).send(err)
 
@@ -57,8 +58,31 @@ exports.save = function(req, res){
       })
     })
   }else{
+    //create new user
+    var user = new User()
 
+    user.email = body.email || '';
+    user.profile.name = body.name || '';
+    user.profile.gender = body.gender || '';
+    user.profile.location = body.location || '';
+    user.profile.website = body.website || '';
+
+    user.save( function(err, saved){
+      if(err) return res.status(503).send(err)
+
+      res.redirect('/admin/users')
+    })
   }
+}
+
+exports.delete = function(req, res){
+  var id = req.params.id
+
+  User.findOne({_id: id}).remove( function(err, removed){
+    if(err) return res.status(503).send(err)
+
+    res.redirect('/admin/users')
+  })
 }
 
 
