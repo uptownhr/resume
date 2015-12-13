@@ -29,18 +29,28 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
+var adminController = require('./controllers/admin');
 var adminUserController = require('./controllers/admin/user');
 
 /**
- * API keys and Passport configuration.
+ * API keys, Passport configuration & app initialization.
  */
 var secrets = require('./config/secrets');
 var passportConf = require('./config/passport');
+var init = require('./config/init');
+
 
 /**
  * Create Express server.
  */
 var app = express();
+
+
+/**
+ * init
+ */
+app.use(init.initialized);
+
 
 /**
  * Connect to MongoDB.
@@ -126,10 +136,11 @@ app.get('/account/unlink/:provider', passportConf.isAuthenticated, userControlle
 /**
  * Admin Routes
  */
-app.get('/admin/users', adminUserController.list)
-app.get('/admin/users/edit/:id?', adminUserController.edit)
-app.get('/admin/users/delete/:id?', adminUserController.delete)
-app.post('/admin/users/save', adminUserController.save)
+app.get('/admin', passportConf.isAdmin, adminController.index)
+app.get('/admin/users', passportConf.isAdmin, adminUserController.list)
+app.get('/admin/users/edit/:id?', passportConf.isAdmin, adminUserController.edit)
+app.get('/admin/users/delete/:id?', passportConf.isAdmin, adminUserController.delete)
+app.post('/admin/users/save', passportConf.isAdmin, adminUserController.save)
 
 /**
  * API examples routes.

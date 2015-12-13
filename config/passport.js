@@ -434,3 +434,16 @@ exports.isAuthorized = function(req, res, next) {
     res.redirect('/auth/' + provider);
   }
 };
+
+/**
+ * Is an admin user
+ */
+
+exports.isAdmin = function(req, res, next){
+  if( req.isAuthenticated() && req.user.role == 'admin' ){
+    next();
+  }else{
+    req.session.returnTo = req.path
+    res.redirect('/login');
+  }
+}
