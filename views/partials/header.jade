@@ -36,5 +36,9 @@
               li
                 a(href='/account') My Account
               li.divider
+              if user.role == 'admin'
+                li
+                  a(href='/admin') Admin
+                li.divider
               li
                 a(href='/logout') Logout
