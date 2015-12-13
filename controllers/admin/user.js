@@ -11,7 +11,8 @@ var User = require('../../models/User');
 exports.list = function(req, res){
   User.find( function(err, users){
     res.render('admin/user/list', {
-      users: users
+      users: users,
+      title: 'Users'
     })
   })
 }
