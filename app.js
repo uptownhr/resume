@@ -31,6 +31,7 @@ var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
 var adminController = require('./controllers/admin');
 var adminUserController = require('./controllers/admin/user');
+var adminTemplateController = require('./controllers/admin/template');
 
 /**
  * API keys, Passport configuration & app initialization.
@@ -68,6 +69,7 @@ app.set('port', process.env.PORT || 3000);
 
 app.set('views', path.join(__dirname, 'views'));
 app.locals.basedir = path.join(__dirname, 'views');
+app.locals.pretty = true;
 app.set('view engine', 'jade');
 
 app.use(compress());
@@ -141,6 +143,13 @@ app.get('/admin/users', passportConf.isAdmin, adminUserController.list)
 app.get('/admin/users/edit/:id?', passportConf.isAdmin, adminUserController.edit)
 app.get('/admin/users/delete/:id?', passportConf.isAdmin, adminUserController.delete)
 app.post('/admin/users/save', passportConf.isAdmin, adminUserController.save)
+
+/**
+ * Template admin routes
+ */
+
+app.get('/admin/template', adminTemplateController.index)
+app.post('/admin/template/save', adminTemplateController.save)
 
 /**
  * API examples routes.

@@ -13,8 +13,10 @@
       ul.nav.navbar-nav
         li(class=title=='Dashboard'?'active':undefined)
           a(href='/admin') Dashboard
+        li(class=title=='Basic Info'?'active':undefined)
+          a(href='/admin/template') Template
         li(class=title=='Users'?'active':undefined)
-          a(href='/admin/users') Users
+          a(href='/admin/users') Admin Users
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=title=='Login'?'active':undefined)

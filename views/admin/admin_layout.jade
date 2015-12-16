@@ -7,6 +7,8 @@ html
         meta(name='csrf-token', content=_csrf)
         title #{title} - Hackathon Starter
         link(rel='stylesheet', href='/css/main.css')
+
+        block css
     body
         include partials/header
 
@@ -29,3 +31,5 @@ html
 
             ga('create', 'UA-XXXXX-X', 'auto');
             ga('send', 'pageview');
+        block js
+        block script
