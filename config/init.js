@@ -1,6 +1,7 @@
 "use strict"
 
 var User = require('../models/User');
+var Template = require('../models/Template');
 var initialized = false;
 
 /**
@@ -12,6 +13,13 @@ var initialized = false;
  */
 exports.initialized = function(req, res, next){
   if( initialized ) return next();
+
+  Template.findOne( function(err, template){
+    if(!template){
+      template = new Template()
+      template.save()
+    }
+  })
 
   User.findOne({role: 'admin'}, function(err, user){
     if(!user){
