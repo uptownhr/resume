@@ -3,7 +3,7 @@ app:
  links:
  - mongo:mongo
  ports:
- - 3000
+ - 3000:3000
  environment:
   - MONGODB=mongodb://mongo:27017/resume
   - VIRTUAL_HOST=myresume.com
