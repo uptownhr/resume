@@ -16,7 +16,7 @@ app:
   - ./public:/app/public
   - ./test:/app/test
   - ./views:/app/views
- command: node-dev app.js
+ command: npm run start
  restart: always
 mongo:
  image: mongo

@@ -6,7 +6,7 @@
     "url": "https://github.com/sahat/hackathon-starter.git"
   },
   "scripts": {
-    "postinstall": "cd public && bower install",
+    "prestart": "cd public && bower install --allow-root",
     "start": "node-dev app.js",
     "test": "mocha --reporter spec --timeout 5000"
   },
