@@ -17,7 +17,6 @@ ADD ./views /app/views
 WORKDIR /app
 
 RUN npm install
-RUN npm install -g node-dev
 
 CMD node-dev app.js
 
